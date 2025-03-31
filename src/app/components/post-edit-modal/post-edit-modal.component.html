@@ -1,0 +1,39 @@
+<div class="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40"></div>
+
+<div class="fixed inset-0 flex justify-center items-center z-50">
+  <div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6 rounded-xl shadow-lg w-full max-w-md relative">
+    <h2 class="text-xl font-bold mb-4">Editar Post</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSave()" class="space-y-4">
+      <input
+        formControlName="title"
+        type="text"
+        class="w-full p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+        placeholder="Título" />
+      <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-red-500 text-sm">
+        Título é obrigatório.
+      </div>
+
+      <textarea
+        formControlName="body"
+        class="w-full p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+        rows="4"
+        placeholder="Corpo"></textarea>
+      <div *ngIf="form.get('body')?.invalid && form.get('body')?.touched" class="text-red-500 text-sm">
+        Corpo é obrigatório.
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" (click)="close.emit()"
+                class="bg-gray-300 dark:bg-gray-700 dark:text-white px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-600">
+          Cancelar
+        </button>
+        <button type="submit"
+                [disabled]="form.invalid"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

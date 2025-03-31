@@ -1,0 +1,41 @@
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="space-y-4 mt-4">
+  <input
+    type="text"
+    formControlName="name"
+    placeholder="Nome"
+    class="w-full p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+  />
+  <div *ngIf="commentForm.get('name')?.invalid && commentForm.get('name')?.touched" class="text-red-500 text-sm">
+    Nome é obrigatório.
+  </div>
+
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="Email"
+    class="w-full p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+  />
+  <div *ngIf="commentForm.get('email')?.invalid && commentForm.get('email')?.touched" class="text-red-500 text-sm">
+    Email válido é obrigatório.
+  </div>
+
+  <textarea
+    formControlName="body"
+    placeholder="Comentário"
+    rows="3"
+    class="w-full p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+  ></textarea>
+  <div *ngIf="commentForm.get('body')?.invalid && commentForm.get('body')?.touched" class="text-red-500 text-sm">
+    Comentário é obrigatório.
+  </div>
+
+  <div class="text-right">
+    <button
+      type="submit"
+      [disabled]="commentForm.invalid"
+      class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {{ editComment ? 'Atualizar' : 'Comentar' }}
+    </button>
+  </div>
+</form>

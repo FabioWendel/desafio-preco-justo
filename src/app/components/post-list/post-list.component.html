@@ -1,0 +1,65 @@
+<app-toast-notification [message]="toastMessage" [type]="toastType" />
+
+<app-confirm-dialog *ngIf="showConfirm" [message]="confirmMessage"
+    (confirm)="onConfirmDelete()" (cancel)="onCancelDelete()">
+</app-confirm-dialog>
+
+<div class="text-center my-4">
+    <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+        (click)="openPostModal()">
+        <p class="flex items-center gap-2">
+            <lucide-icon [img]="MailPlus" class="my-icon" [size]="20"/>Novo Post
+        </p>
+    </button>
+</div>
+
+<div *ngIf="showPostModal">
+    <div class="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40"></div>
+
+    <div class="fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6 rounded-xl shadow-lg w-full max-w-md">
+            <app-post-form (create)="onCreatePost($event); closePostModal()"
+                (cancel)="closePostModal()"></app-post-form>
+        </div>
+    </div>
+</div>
+
+<app-post-edit-modal *ngIf="selectedPost" [post]="selectedPost" (close)="closeEdit()" (save)="saveEdit($event)">
+</app-post-edit-modal>
+
+<app-loading-spinner *ngIf="isLoading" />
+
+<div class="max-w-2xl mx-auto p-4">
+    <div *ngFor="let post of posts"
+        class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-xl p-4 shadow-sm mb-6">
+
+        <div class="flex gap-3 items-start">
+            <img [src]="'https://i.pravatar.cc/40?img=' + post.userId" class="rounded-full w-10 h-10" />
+            <div class="flex-1">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-semibold">Usuário {{ post.userId }}</h2>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">#{{ post.id }}</span>
+                </div>
+                <p class="mt-1">{{ post.title }}</p>
+            </div>
+        </div>
+
+        <p class="mt-3 whitespace-pre-line">{{ post.body }}</p>
+
+        <div class="flex gap-4 mt-4 text-sm font-medium">
+            <button (click)="openEdit(post)" class="text-blue-500 hover:underline dark:text-blue-400">
+                <p class="flex items-center gap-2">
+                    <lucide-icon [img]="Pencil" class="my-icon" [size]="15"/>Editar
+                </p>
+            </button>
+            <button (click)="onRequestDelete(post.id)"
+                class="text-red-500 hover:underline dark:text-red-400">
+                <p class="flex items-center gap-2">
+                    <lucide-icon [img]="Trash2" class="my-icon" [size]="15"/>Excluir
+                </p>
+            </button>
+        </div>
+
+        <app-comment-list [postId]="post.id"></app-comment-list>
+    </div>
+</div>

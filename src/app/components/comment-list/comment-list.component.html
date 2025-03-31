@@ -1,0 +1,63 @@
+<app-toast-notification [message]="toastMessage" [type]="toastType" />
+
+<app-confirm-dialog *ngIf="showConfirm" [message]="confirmMessage" (confirm)="onConfirmDelete()"
+    (cancel)="onCancelDelete()">
+</app-confirm-dialog>
+
+<div class="mt-4 border-t pt-4 border-gray-200 dark:border-gray-700">
+    <h3 class="font-semibold mb-2 text-gray-700 dark:text-gray-100">Comentários</h3>
+    <app-loading-spinner *ngIf="isLoading" />
+    <ng-container *ngIf="!isLoading">
+        <div *ngFor="let comment of comments"
+            class="border p-2 mb-2 rounded bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <p class="text-sm font-semibold text-blue-700 dark:text-blue-400">{{ comment.email }}</p>
+            <p class="text-gray-800 dark:text-gray-100">{{ comment.body }}</p>
+            <div class="text-right space-x-2">
+
+                <button class="text-sm text-blue-500 hover:underline dark:text-blue-400" (click)="openModal(comment)">
+                    <p class="flex items-center gap-2">
+                        <lucide-icon [img]="Pencil" class="my-icon" [size]="10" />Editar
+                    </p>
+                </button>
+                <button class="text-sm text-red-500 hover:underline dark:text-red-400"
+                    (click)="onRequestDelete(comment.id)">
+                    <p class="flex items-center gap-2">
+                        <lucide-icon [img]="Trash2" class="my-icon" [size]="10" />Excluir
+                    </p>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="text-right mt-4">
+        <button
+            class="text-sm bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-500"
+            (click)="openModal()">
+            <p class="flex items-center gap-2">
+                <lucide-icon [img]="MessageCirclePlus" class="my-icon" [size]="20" />Novo Comentário
+            </p>
+        </button>
+    </div>
+
+    <div *ngIf="showModal">
+        <div class="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-40"></div>
+
+        <div class="fixed inset-0 flex items-center justify-center z-50">
+            <div
+                class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6 rounded-xl shadow-lg w-full max-w-md">
+                <h2 class="text-lg font-semibold mb-4">
+                    {{ commentToEdit ? 'Editar Comentário' : 'Novo Comentário' }}
+                </h2>
+
+                <app-comment-form [postId]="postId" [editComment]="commentToEdit"
+                    (save)="handleSave($event); closeModal()">
+                </app-comment-form>
+
+                <div class="text-right mt-4">
+                    <button class="text-sm text-gray-600 hover:underline dark:text-gray-300"
+                        (click)="closeModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

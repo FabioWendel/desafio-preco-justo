@@ -1,27 +1,63 @@
-# DesafioPrecoJusto
+# Desafio Preço Justo 🧠💸
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+Este projeto é um CRUD de Posts e Comentários em Angular, usando a API pública [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com), com gerenciamento in-memory, dark mode, Tailwind CSS.
 
-## Development server
+## ✅ Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- CRUD completo de posts
+- CRUD completo de comentários (por post)
+- Edição local se o post/comentário for criado pelo usuário
+- Feedback visual com toasts e modais de confirmação
+- Dark Mode com toggle
+- Loading spinner
+- Responsive + Mobile-ready
+- Componentes reativos com FormBuilder
+- Uso de environment para configurar API
+- Docker ready 🐳
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Tecnologias
 
-## Build
+- Angular (standalone)
+- Tailwind CSS
+- Lucide Angular (ícones)
+- RxJS
+- Docker + NGINX (produção)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🧪 Como rodar localmente
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Pré-requisitos
 
-## Running end-to-end tests
+- Node.js (v18+ recomendado)
+- Angular CLI
+- Docker (opcional para build final)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Instalar dependências
 
-## Further help
+```bash
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm install
+
+ng serve
+
+```
+
+## 🐳 Rodando com Docker
+
+- 1. Faça o build da imagem Docker
+````bash
+
+    docker build -t desafio-preco-justo .
+
+````
+- 2. Rode o container
+````bash
+
+    docker run -d -p 8080:80 desafio-preco-justo
+
+````
+- 3.Acesse no navegador:
+📍 http://localhost:8080/posts
