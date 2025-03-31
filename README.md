@@ -35,29 +35,51 @@ Este projeto é um CRUD de Posts e Comentários em Angular, usando a API públic
 - Angular CLI
 - Docker (opcional para build final)
 
-### Instalar dependências
+### Clonar Projeto
+
+```bash
+
+git clone https://github.com/FabioWendel/desafio-preco-justo.git
+
+```
+
+```bash
+
+cd desafio-preco-justo
+
+```
+
+### Rodando Local sem Docker & Instalar dependências
 
 ```bash
 
 npm install
 
+```
+
+```bash
+
 ng serve
 
 ```
 
+- Acesse no navegador:
+📍  http://localhost:4200/posts
+
+
 ## 🐳 Rodando com Docker
 
-- 1. Faça o build da imagem Docker
+- Faça o build da imagem Docker
 ````bash
 
     docker build -t desafio-preco-justo .
 
 ````
-- 2. Rode o container
+- Rode o container
 ````bash
 
     docker run -d -p 8080:80 desafio-preco-justo
 
 ````
-- 3.Acesse no navegador:
+- Acesse no navegador:
 📍 http://localhost:8080/posts
